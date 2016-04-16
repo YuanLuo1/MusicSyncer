@@ -1,7 +1,0 @@
-HTTPServer:
-	Handle requests for join/create/leave group
-	Handle requests for uploading file
-Instructions:
-	- join/create group: http://localhost:8080/join, http://SERVERIP/create, users can join and create groups
-	- leave group: curl -i -d "clientip=192.168.0.107&groupid=0" localhost:8080/leave
-	- upload file: http://localhost:8080/upload 
