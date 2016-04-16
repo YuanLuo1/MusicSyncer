@@ -116,6 +116,10 @@ func listFiles(conn net.Conn, reader *bufio.Reader){
     conn.Close()
 }
 
+func CheckServerDead() {
+
+}
+
 func main() {
 	var port string = "9999"
 
