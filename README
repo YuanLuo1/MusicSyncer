@@ -1,0 +1,46 @@
+# MusicSyncer
+
+========== MIDTERM ==========
+
+File transfer between each server:
+	file --
+		server.go
+		client.go
+	decription -- 
+		Our second layer(Server) can upload or request a file from each other
+		By typing "upload fileName", server is able to post a new file to other 
+		server.
+		By typing "get fileName", server will request a file from other server 
+		and download the file if needed
+
+========== What Our final result will look like ==========
+
+Three different layers -- 
+	1. centrallized server -- Maintain the group list and their member servers. 
+					  Approved the server to join or create a music list.
+	2. node server -- Where clients can fetch all the information, join 
+					  or create a new group. node server will retrieve the group's
+					  node list from centralized server and connect with each
+					  other directly. Nodes within a group will discuss with each 
+					  other whenever a client modify the list, add music into the 
+					  list or delete file from the list. All the servers within the
+					  group must reach some kind of consensus in order to process 
+					  the modification.
+	3. client -- Clients will connect with one of the servers via HTTP 
+				 (typically by web browsers). They can join or create a new music 
+				 list, and modify the music list. Each client is only allow to join
+				 one music list.
+
+Distributed system concept --
+	1. Avoid single point failure --
+		If a client is trying to connect to a failure server, it should be redirect
+		 to other servers which is available to serve a client.
+	2. Consistency --
+		If a client modify the list, all the otehr nodes must reach a consensus to
+	    allow add/delete/move of particular file
+	3. Data Replication --
+		Once a file has been upload to the server via client, the servers within 
+		the group will choose some servers to implement data replication. If a 
+		server with the particular fails, the other group node will try to reach 
+		other nodes to retrieve the file.
+
