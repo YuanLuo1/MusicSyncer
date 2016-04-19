@@ -12,15 +12,25 @@ import (
     "os"
 )
 
+type Server struct {
+    ip string
+    comm_port string
+    http_port string
+    heartbeat_port string
+}
+
 var (
     groups []Group
-    servers []string
+    // servers []string
+    // heartbeatPort []string
     localGroups []GroupMusic
     hasGroups map[string]bool
     dir string
-    myIp string
-    myPort string
-    myAddr string
+    // myIp string
+    // myPort string
+    // myAddr string
+    servers []Server
+    myServer Server
     heartBeatTracker = new(HeartBeat)
 )
 
@@ -49,7 +59,7 @@ func createHandler(w http.ResponseWriter, r *http.Request) {
     		var newGroup Group
 			newGroup.name = groupName
 			newGroup.serverList = make(map[string]bool)
-			newGroup.addServer(myAddr)
+			newGroup.addServer(myServer.ip + ":" + myServer.comm_port)
 			groups = append(groups, newGroup)
 			hasGroups[groupName] = true
 			fmt.Println(groups)
@@ -146,14 +156,14 @@ func startHTTP() {
     http.HandleFunc("/upload.html", addfileHandler)
 
     //http.HandleFunc("/leave", leaveHandler)
-    var httpPort string
-    switch myPort {
-    	case "9292": httpPort = ":8282"
-    	case "9293": httpPort = ":8283"
-    	case "9294": httpPort = ":8284"
-    	case "9295": httpPort = ":8285"
-    }
-    http.ListenAndServe(httpPort, nil)
+    // var httpPort string
+    // switch myPort {
+    // 	case "9292": httpPort = ":8282"
+    // 	case "9293": httpPort = ":8283"
+    // 	case "9294": httpPort = ":8284"
+    // 	case "9295": httpPort = ":8285"
+    // }
+    http.ListenAndServe(myServer.http_port, nil)
    
 }
 
@@ -182,17 +192,18 @@ func main() {
     fmt.Print("Enter a number(0-3) set up this server: ")
     var i int
     fmt.Scan(&i)
-    myAddr = servers[i]
-    localInfo := strings.Split(servers[i],":")
-    myIp = localInfo[0]
-    myPort = localInfo[1]
-    fmt.Println(myIp, myPort)
+    myServer = servers[i]
+    // myAddr = servers[i]
+    // localInfo := strings.Split(servers[i],":")
+    // myIp = localInfo[0]
+    // myPort = localInfo[1]
+    // fmt.Println(myIp, myPort)
 
 	readGroupConfig()
 	readMusicConfig()
 	
 	heartbeat()
-	go listeningMsg(myIp, myPort)
+	go listeningMsg(myServer.ip, myServer.comm_port)
     startHTTP()
 }
 

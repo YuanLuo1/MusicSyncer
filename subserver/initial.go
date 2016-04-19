@@ -86,7 +86,9 @@ func readServerConfig(){
 			fmt.Println("Error: ", err)
 			return
 		}
-		servers = append(servers, record[1])
+		// Server struct {ip, comm_port, http_port, heart_beat_port}
+		servers = append(servers, Server{record[1], record[2], record[3], record[4]}) 
+		// servers = append(servers, record[1])
     }
 	fmt.Println("Servers: ", servers)	
 }
