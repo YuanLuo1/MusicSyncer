@@ -726,10 +726,9 @@ ul.popular li a:hover{
   color: #bbb;
 }
 .single-bottom  input[type="submit"]{
-	  border: none;
+	border: none;
   color: #000;
   font-size: 1.1em;
-  width: 10%;
   margin: 0.5em 0em;
   background: #fc5c5c;
   transition: 0.5s all;
@@ -951,18 +950,20 @@ h3.typo1 {
 	padding: 10px 15px 10px 15px;
 }
 .contact-form input[type="submit"]{
-	background: #2d598a;
-	border: 1px solid #2d598a;
-	padding: .6em 0;
-	width: 14%;
-	margin-top: 2em;
-	font-size: 16px;
-	color: #fff;
-	font-weight: 400;
-	letter-spacing: 1px;
-	outline: none;
-	transition: .5s all;
-}
+	border: none;
+  color: #000;
+  font-size: 1.1em;
+  margin: 0.5em 0em;
+  background: #fc5c5c;
+  transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  color: #fff;
+   padding: 0.5em 1em;
+   outline:none;
+ }
+ 
 .contact-form input[type="submit"]:hover{
 	color: #fc5c5c;
 	border: 1px solid #fc5c5c;
@@ -1037,7 +1038,7 @@ ul.img-social-stags {
 /*--single--*/
 .single-bottom input[type="submit"] {
   font-size: 1em;
-  width: 14%;
+  width: 50%;
 }
 .post-top p {
   font-size: 0.81em;
