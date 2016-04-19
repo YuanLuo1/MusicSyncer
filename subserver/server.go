@@ -12,15 +12,27 @@ import (
     "os"
 )
 
-var groups []Group 
-var servers []string 
-var localGroups []GroupMusic
-var hasGroups map[string]bool
+var (
+    groups []Group
+    servers []string
+    localGroups []GroupMusic
+    hasGroups map[string]bool
+    dir string
+    myIp string
+    myPort string
+    myAddr string
+    heartBeatTracker = new(HeartBeat)
+)
 
-var dir string
-var myIp string
-var myPort string
-var myAddr string
+// var groups []Group 
+// var servers []string 
+// var localGroups []GroupMusic
+// var hasGroups map[string]bool
+
+// var dir string
+// var myIp string
+// var myPort string
+// var myAddr string
 
 func createHandler(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println(dir)
@@ -146,6 +158,22 @@ func startHTTP() {
 }
 
 
+/* Update the servers if recv a dead server */
+func getDeadServer(){
+    fmt.Println("Get dead servers from heartbeat manager's deadchannel")
+    deadServerChannel := heartBeatTracker.GetDeadChannel()
+    // TODO: Do something for the dead servers
+    for {
+
+    }
+}
+
+func InitialHeartBeat(){
+    fmt.Println("Initialize heartbeat")
+    // argument : (myIP, other servers)
+    heartBeatTracker.newInstance(myIP+":"+myPort, )
+
+}
 
 func main() {
 	readServerConfig() 
